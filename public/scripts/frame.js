@@ -51,7 +51,7 @@ var MainFrame = React.createClass({
                 <button onClick={this.confirmBullying}>Yes</button>
                 <button onClick={this.denyBullying}>No</button>
                 // <img src={this.state.post.image_url}></img> <br/> 
-                {this.state.profile_owner_id}
+                // {this.state.data.profile_owner_id}
                 // <b>Likes:</b> {this.state.post.likes} <br/> 
                 // <b>Caption:</b> {this.state.post.owner_caption} <br/> 
             </div>            
