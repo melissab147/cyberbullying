@@ -23,3 +23,8 @@ module.exports = {
     server: server,
     io: io
 };
+
+React.render(
+    <ViewPost />,
+    document.getElementById('content')
+)
