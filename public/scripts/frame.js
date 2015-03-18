@@ -1,6 +1,24 @@
 var socket = io();
 
 var MainFrame = React.createClass({
+    getInitialState: function() {
+        return {data: []};
+    },
+  
+    componentDidMount: function() {
+        $.ajax({
+            url: this.props.url,
+            dataType: 'json',
+            success: function(data) {
+                this.setState({
+                    data: data
+                });
+            }.bind(this),
+            error: function(xhr, status, err) {
+                console.error(this.props.url, status, err.toString());
+            }.bind(this)
+        });
+    },
 
     confirmBullying: function() {
         console.log("Heard click")
@@ -15,10 +33,10 @@ var MainFrame = React.createClass({
             <div>
                 <button onClick={this.confirmBullying}>Yes</button>
                 <button onClick={this.denyBullying}>No</button>
-                <img src={this.state.post.image_url}></img> <br/> 
-                {this.state.post.profile_owner_id}
-                <b>Likes:</b> {this.state.post.likes} <br/> 
-                <b>Caption:</b> {this.state.post.owner_caption} <br/> 
+                // <img src={this.state.post.image_url}></img> <br/> 
+                {this.state.profile_owner_id}
+                // <b>Likes:</b> {this.state.post.likes} <br/> 
+                // <b>Caption:</b> {this.state.post.owner_caption} <br/> 
             </div>            
         )
     }
