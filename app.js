@@ -25,6 +25,3 @@ module.exports = {
     server: server,
     io: io
 };
-
-
-
