@@ -12,8 +12,9 @@ gulp.task('browser-sync', ['develop'], function() {
 });
 
 gulp.task('develop', function(cb) {
-    return nodemon({ script: 'server.js', ext: 'html js'})
+    return nodemon({ script: 'app.js', ext: 'html js'})
     .on('start', function() {
+        cb();
     });
 });
 
