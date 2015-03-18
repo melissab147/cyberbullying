@@ -1,7 +1,13 @@
 var socket = io();
 
 var MainFrame = React.createClass({
-
+    retrieveData: function() {
+        socket.emit('data:retrieve')
+    },
+    getData: function(data) {
+        this.setState({data: data});
+        console.log(this.state.data);
+    },
     confirmBullying: function() {
         console.log("Heard click")
         socket.emit('survey:yes');
@@ -9,6 +15,13 @@ var MainFrame = React.createClass({
     denyBullying: function() {
         console.log("Heard click")
         socket.emit('survey:no')
+    },
+    getInitialState: function() {
+        socket.on('data:send', this.getData)
+        return {data: []}
+    },
+    componentDidMount: function() {
+        this.retrieveData();
     },
     render: function() {
         return (
@@ -21,6 +34,6 @@ var MainFrame = React.createClass({
 });
 
 React.render(
-    <MainFrame url='http://localhost:3000/sources'  />,
+    <MainFrame />,
     document.getElementById('content')
 )
