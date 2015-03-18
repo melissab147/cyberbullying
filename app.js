@@ -3,6 +3,7 @@ var path = require('path');
 var express = require('express');
 var bodyParser = require('body-parser');
 var socket = require('./lib/io.js');
+var db = require('./lib/db.js');
 var app = express();
 
 app.use('/', express.static(path.join(__dirname, 'public')));
@@ -16,6 +17,8 @@ var server = app.listen(app.get('port'), function() {
 
 var io = require('socket.io')(server);
 io.on('connection', socket);
+
+db.initialize();
 
 module.exports = {
     app: app,
