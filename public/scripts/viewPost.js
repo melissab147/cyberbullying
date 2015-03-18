@@ -16,10 +16,14 @@ var ViewPost = React.createClass({
         console.log("Heard click")
         socket.emit('survey:no')
     },
-    handleClick: function(event) {
+    commentClick: function() {
         console.log("Heard click")
         socket.emit('comments')
     },
+    nextClick: function() {
+        console.log("Heard click")
+        socket.emit('next')
+    },    
     getInitialState: function() {
         socket.on('data:send', this.getData)
         return {data: []}
@@ -36,26 +40,42 @@ var ViewPost = React.createClass({
             return (
                 <div>
                     <div className="post row">
-                        <div className="image five columns">
-                            <img key={result.id} src={result.image_url} width="250"></img>
+                        <div className="image seven columns">
+                            <figure>
+                                <img key={result.id} src={result.image_url} width="100%"></img>
+                                <figcaption key={result.id}>{result.owner_caption}</figcaption>
+                            </figure>
                         </div>
                         <div className="info">
-                            <p key={result.id}><b>{result.profile_owner_id}</b>: {result.owner_caption}</p>
+                            <p key={result.id}><b>User</b>: {result.profile_owner_id}</p>
                             <p key={result.id}><b>Likes</b>: {result.likes}</p>
                             <p key={result.id}>{result.caption_time}</p>
-                            <button key={result.id} onClick={this.handleClick}> Comments </button><br/>
+                            <button key={result.id} onClick={this.commentClick}> Comments </button><br/>
+                            <div className="viewComments">
+                                <ViewComments ref="viewComments"/>
+                            </div>                            
                         </div>
                     </div>
-
+                    <h3> Survey Questions </h3>
                     <div className="survey row">
-                        <h3> Survey Questions </h3>
-                        <p>Is there any cyberaggressive behavior in the online post? Mark yes if there is at least one negative word/comment and/or content with intent to harm someone or others.</p>
-                        <button onClick={this.confirmBullying}>Yes</button>
-                        <button onClick={this.denyBullying}>No</button> <br/>
-                        <p>Is there any cyerbullying in the online post? Mark yes if there are negative words and/or comment with intent to harm someone or other, and the post includes two or more repeated negativity against a victim that cannot easily defend him or herself.</p>
-                        <button onClick={this.confirmBullying}>Yes</button>
-                        <button onClick={this.denyBullying}>No</button> <br/>                        
+                        <div className="question eight columns">
+                            <p>Is there any cyberaggressive behavior in the online post? Mark yes if there is at least one negative word/comment and/or content with intent to harm someone or others.</p>
+                        </div>
+                        <div className="answer">
+                            <button onClick={this.confirmBullying}>Yes</button>
+                            <button onClick={this.denyBullying}>No</button> <br/>
+                        </div>
                     </div>
+                    <div className="survey row">
+                        <div className="question eight columns">
+                            <p>Is there any cyerbullying in the online post? Mark yes if there are negative words and/or comment with intent to harm someone or other, and the post includes two or more repeated negativity against a victim that cannot easily defend him or herself.</p>
+                        </div>
+                        <div className="answer btn-group">
+                            <button onClick={this.confirmBullying}>Yes</button>
+                            <button onClick={this.denyBullying}>No</button> <br/>
+                        </div>
+                    </div>
+                    <button onClick={this.nextClick} className="nextButton">Next Post</button> <br/>
                 </div>
 
             )
@@ -67,8 +87,3 @@ var ViewPost = React.createClass({
         }
     }
 });
-
-{/*React.render(
-    <ViewPost />,
-    document.getElementById('content')
-)*/}
