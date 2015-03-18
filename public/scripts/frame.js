@@ -1,6 +1,7 @@
 var socket = io();
 
 var MainFrame = React.createClass({
+<<<<<<< HEAD
     getInitialState: function() {
         return {data: []};
     },
@@ -20,6 +21,15 @@ var MainFrame = React.createClass({
         });
     },
 
+=======
+    retrieveData: function() {
+        socket.emit('data:retrieve')
+    },
+    getData: function(data) {
+        this.setState({data: data});
+        console.log(this.state.data);
+    },
+>>>>>>> e57b02fbdc143739c09ea549531e24d8ccc394d2
     confirmBullying: function() {
         console.log("Heard click")
         socket.emit('survey:yes');
@@ -27,6 +37,13 @@ var MainFrame = React.createClass({
     denyBullying: function() {
         console.log("Heard click")
         socket.emit('survey:no')
+    },
+    getInitialState: function() {
+        socket.on('data:send', this.getData)
+        return {data: []}
+    },
+    componentDidMount: function() {
+        this.retrieveData();
     },
     render: function() {
         return (
@@ -43,7 +60,6 @@ var MainFrame = React.createClass({
 });
 
 React.render(
-    // <MainFrame url='http://localhost:3000/sources'  />,    
-    <MainFrame url='data/cyberbully.json.data'  />,
+    <MainFrame />,
     document.getElementById('content')
 )

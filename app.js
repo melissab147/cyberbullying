@@ -18,8 +18,6 @@ var server = app.listen(app.get('port'), function() {
 var io = require('socket.io')(server);
 io.on('connection', socket);
 
-db.initialize();
-
 module.exports = {
     app: app,
     server: server,
