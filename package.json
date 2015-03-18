@@ -1,7 +1,7 @@
 {
-  "name": "react-tutorial",
+  "name": "Cyberbullying-Survey-Page",
   "version": "0.0.0",
-  "description": "Skeleton Code for ReactJS Learn-a-thon.",
+  "description": "A survey for humans to label instances of cyberbullying.",
   "main": "server.js",
   "dependencies": {
     "body-parser": "^1.4.3",
@@ -9,24 +9,13 @@
     "monk": "^1.0.0",
     "socket.io": "^1.3.5"
   },
-  "devDependencies": {
-    "browser-sync": "^2.2.4",
-    "gulp": "^3.8.11",
-    "gulp-nodemon": "^1.0.5"
-  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node app.js"
   },
-  "keywords": [
-    "react",
-    "tutorial",
-    "comment",
-    "example"
-  ],
   "author": "ucdd2-sp2015",
-  "bugs": {
-    "url": "https://github.com/ucdd2-sp15/react-tutorial/issues"
-  },
-  "homepage": "https://github.com/ucdd2-sp15/react-tutorial"
+  "devDependencies": {
+    "grunt": "^0.4.5",
+    "grunt-convert": "^0.1.12"
+  }
 }
