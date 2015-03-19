@@ -43,14 +43,15 @@ var ViewPost = React.createClass({
                         <div className="image seven columns">
                             <figure>
                                 <img key={result.id} src={result.image_url} width="100%"></img>
-                                <figcaption key={result.id}>{result.owner_caption}</figcaption>
+                                <figcaption key={result.id}>&ldquo;{result.owner_caption}&rdquo;</figcaption>
                             </figure>
                         </div>
                         <div className="info">
                             <p key={result.id}><b>User</b>: {result.profile_owner_id}</p>
                             <p key={result.id}><b>Likes</b>: {result.likes}</p>
                             <p key={result.id}>{result.caption_time}</p>
-                            <button key={result.id} onClick={this.commentClick}> Comments </button><br/>
+                            <p key={result.id}><b>Comments</b>:</p>
+                            {/*<button key={result.id} onClick={this.commentClick}> Comments </button><br/>*/}
                             <div className="viewComments">
                                 <ViewComments ref="viewComments"/>
                             </div>                            

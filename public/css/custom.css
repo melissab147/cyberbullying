@@ -4,8 +4,20 @@
 
 .instructions{
   font-size: 12px;
-  overflow-y: auto;
-  height: 100%;
+  overflow-y: scroll;
+  height: 100vh;
+}
+
+.comments{
+	overflow-y: scroll;
+	height: 300px;
+	padding-left: 10px;
+	padding-right: 10px;	
+	border-right: thin solid #A4A4A4;
+	border-top: thin solid #A4A4A4;
+	border-bottom: thin solid #A4A4A4;
+	border-left: thin solid #A4A4A4;
+	font-size: 14px;
 }
 
 .info{
@@ -15,12 +27,15 @@
 .image{
 	padding-right: 10px;
 	font-style: italic;
-	font-size: 10px;
+	font-size: 12px;
 }
 
 .verticalLine{
 	padding-right: 20px;
 	border-right: thin solid #A4A4A4;
+	border-top: thin solid #A4A4A4;
+	border-bottom: thin solid #A4A4A4;
+
 }
 
 .question{

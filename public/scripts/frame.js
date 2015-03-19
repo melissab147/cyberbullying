@@ -23,6 +23,7 @@ var MainFrame = React.createClass({
 
             return (
                 <div className="mainPage">
+                    <h1>Cyberbullying Research</h1>
                     <div className="three columns instructions verticalLine">
                         <h3>Instructions:</h3>
                         <p>The purpose of this research is to better understand cyberaggression and cyberbullying in online social networks. Please help us by answering the questions for each image and its associated posts on Instagram. Use the definitions below to answer the questions about the different types of content that is posted.</p>

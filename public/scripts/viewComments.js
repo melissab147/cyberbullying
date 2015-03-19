@@ -25,6 +25,20 @@ var ViewComments = React.createClass({
                 <div className="comments">
                     <h6> To do... comments go here </h6>
                     <p><b>User</b>: comment (post time)</p>
+                    <p><b>User</b>: comment (post time)</p>
+                    <p><b>User</b>: comment (post time)</p>
+                    <p><b>User</b>: comment (post time)</p>
+                    <p><b>User</b>: comment (post time)</p>
+                    <p><b>User</b>: comment (post time)</p>
+                    <p><b>User</b>: comment (post time)</p>
+                    <p><b>User</b>: comment (post time)</p>
+                    <p><b>User</b>: comment (post time)</p>
+                    <p><b>User</b>: comment (post time)</p>
+                    <p><b>User</b>: comment (post time)</p>
+                    <p><b>User</b>: comment (post time)</p>
+                    <p><b>User</b>: comment (post time)</p>
+                    <p><b>User</b>: comment (post time)</p>
+                    
                 </div>
 
             )
