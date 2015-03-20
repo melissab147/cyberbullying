@@ -24,5 +24,12 @@ module.exports = {
     io: io
 };
 
+// React.render(
+//     <ViewPost />,
+//     document.getElementById('content')
+// )
 
-
+React.render(
+    <ViewComments />,
+    document.getElementById('content')
+)
