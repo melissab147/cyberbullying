@@ -5,37 +5,48 @@ var ViewPost = React.createClass({
         socket.emit('data:retrieve')
     },
     getData: function(data) {
+        console.log(data)
         this.setState({data: data});
-        console.log(this.state.data[0], "id: ",this.state.data[0].profile_owner_id);
+    },
+    confirmAggression: function() {
+        console.log("Heard click")
+        this.setState({aggression: true})
+    },
+    denyAggression: function() {
+        console.log("Heard click")
+        this.setState({aggression: false})
     },
     confirmBullying: function() {
         console.log("Heard click")
-        socket.emit('survey:yes');
+        this.setState({bullying: true})
     },
     denyBullying: function() {
         console.log("Heard click")
-        socket.emit('survey:no')
+        this.setState({survey: false})
     },
     commentClick: function() {
         console.log("Heard click")
         socket.emit('comments')
     },
     nextClick: function() {
-        console.log("Heard click")
-        socket.emit('next')
+        if(this.state.aggression === null || this.state.bullying === null) {
+            alert("Please answer the survey before proceeding.");
+            return; 
+        }
+        var results = {aggression: this.state.aggression, bullying: this.state.bullying}
+        socket.emit('survey:next', results)
     },    
     getInitialState: function() {
         socket.on('data:send', this.getData)
-        return {data: []}
+        return {data: [], bullying: null, aggression: null }
     },
     componentDidMount: function() {
         this.retrieveData();
     },
     render: function() {
-        if (this.state.data[0]){
-            console.log(this.state.data);
+        if (this.state.data){
 
-            var result = this.state.data[0];
+            var result = this.state.data;
 
             return (
                 <div>
@@ -53,7 +64,7 @@ var ViewPost = React.createClass({
                             <p key={result.id}><b>Comments</b>:</p>
                             {/*<button key={result.id} onClick={this.commentClick}> Comments </button><br/>*/}
                             <div className="viewComments">
-                                <ViewComments ref="viewComments"/>
+                                <ViewComments />
                             </div>                            
                         </div>
                     </div>
@@ -63,8 +74,9 @@ var ViewPost = React.createClass({
                             <p>Is there any cyberaggressive behavior in the online post? Mark yes if there is at least one negative word/comment and/or content with intent to harm someone or others.</p>
                         </div>
                         <div className="answer">
-                            <button onClick={this.confirmBullying}>Yes</button>
-                            <button onClick={this.denyBullying}>No</button> <br/>
+                            <br />
+                            <button onClick={this.confirmAggression}>Yes</button>
+                            <button onClick={this.denyAggression}>No</button> <br/>
                         </div>
                     </div>
                     <div className="survey row">
@@ -72,6 +84,7 @@ var ViewPost = React.createClass({
                             <p>Is there any cyerbullying in the online post? Mark yes if there are negative words and/or comment with intent to harm someone or other, and the post includes two or more repeated negativity against a victim that cannot easily defend him or herself.</p>
                         </div>
                         <div className="answer btn-group">
+                            <br />
                             <button onClick={this.confirmBullying}>Yes</button>
                             <button onClick={this.denyBullying}>No</button> <br/>
                         </div>

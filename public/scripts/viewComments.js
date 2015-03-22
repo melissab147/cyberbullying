@@ -1,12 +1,14 @@
 var socket = io();
 
 var ViewComments = React.createClass({
+    parseComments: function() {
+    
+    },
     retrieveData: function() {
         socket.emit('data:retrieve')
     },
     getData: function(data) {
         this.setState({data: data});
-        console.log(this.state.data[0], "id: ",this.state.data[0].profile_owner_id);
     },
     getInitialState: function() {
         socket.on('data:send', this.getData)
@@ -18,8 +20,6 @@ var ViewComments = React.createClass({
     render: function() {
         if (this.state.data){
             console.log(this.state.data);
-
-            var result = this.state.data[0];
 
             return (
                 <div className="comments">
@@ -51,7 +51,3 @@ var ViewComments = React.createClass({
     }
 });
 
-React.render(
-    <MainFrame />,
-    document.getElementById('content')
-)
