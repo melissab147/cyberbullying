@@ -5,27 +5,21 @@ var ViewPost = React.createClass({
         socket.emit('data:retrieve')
     },
     getData: function(data) {
-        console.log(data)
         this.setState({data: data});
     },
     confirmAggression: function() {
-        console.log("Heard click")
         this.setState({aggression: true})
     },
     denyAggression: function() {
-        console.log("Heard click")
         this.setState({aggression: false})
     },
     confirmBullying: function() {
-        console.log("Heard click")
         this.setState({bullying: true})
     },
     denyBullying: function() {
-        console.log("Heard click")
-        this.setState({survey: false})
+        this.setState({bullying: false})
     },
     commentClick: function() {
-        console.log("Heard click")
         socket.emit('comments')
     },
     nextClick: function() {
@@ -35,6 +29,7 @@ var ViewPost = React.createClass({
         }
         var results = {aggression: this.state.aggression, bullying: this.state.bullying}
         socket.emit('survey:next', results)
+        this.setState({aggression: null, bullying: null});
     },    
     getInitialState: function() {
         socket.on('data:send', this.getData)
@@ -47,6 +42,26 @@ var ViewPost = React.createClass({
         if (this.state.data){
 
             var result = this.state.data;
+            var bullyingClassYes = "";
+            var bullyingClassNo = "";
+            var aggressionClassYes = "";
+            var aggressionClassNo = "";
+
+            if(this.state.bullying == true) {
+                bullyingClassYes += "affirmative";
+            }
+
+            if(this.state.bullying == false) {
+                bullyingClassNo += "negative";
+            }
+
+            if(this.state.aggression == true) {
+                aggressionClassYes += "affirmative";
+            }
+
+            if(this.state.aggression == false) {
+                aggressionClassNo += "negative";
+            }
 
             return (
                 <div>
@@ -75,8 +90,8 @@ var ViewPost = React.createClass({
                         </div>
                         <div className="answer">
                             <br />
-                            <button onClick={this.confirmAggression}>Yes</button>
-                            <button onClick={this.denyAggression}>No</button> <br/>
+                            <button className={aggressionClassYes} onClick={this.confirmAggression}>Yes</button>
+                            <button className={aggressionClassNo} onClick={this.denyAggression}>No</button> <br/>
                         </div>
                     </div>
                     <div className="survey row">
@@ -85,8 +100,8 @@ var ViewPost = React.createClass({
                         </div>
                         <div className="answer btn-group">
                             <br />
-                            <button onClick={this.confirmBullying}>Yes</button>
-                            <button onClick={this.denyBullying}>No</button> <br/>
+                            <button className={bullyingClassYes} onClick={this.confirmBullying}>Yes</button>
+                            <button className={bullyingClassNo} onClick={this.denyBullying}>No</button> <br/>
                         </div>
                     </div>
                     <button onClick={this.nextClick} className="nextButton">Next Post</button> <br/>
